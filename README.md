@@ -112,7 +112,7 @@ adb shell pm uninstall --user 0 com.miui.analytics
 
 ## 目标
 
-开机不进 PatchWall，直接进第三方 Launcher。**推荐 [Projectivy](https://projectivylauncher.com/)**（开源、可自定义壁纸/分组/屏保，本文作者在用）；FLauncher 为极简备选。（下文逆向实录以 FLauncher 为主角，方法对任意桌面通用。）
+开机不进 PatchWall，直接进 **[Projectivy](https://projectivylauncher.com/)**（开源、可自定义壁纸/分组/屏保，作者在用）。方法对任意带 HOME 过滤器的桌面通用。
 
 ## 踩坑记录（排除法）
 
@@ -121,7 +121,7 @@ adb shell pm uninstall --user 0 com.miui.analytics
 | `cmd package set-home-activity` | 返回 Success 但**无效**（首选记录写入了，解析不认） |
 | `pm uninstall --user 0 com.mitv.tvhome` | 黑屏 → 落在系统兜底页 FallbackHome |
 | `settings put system tvservice_forground_app` | 该键与桌面解析无关 |
-| 重打包 FLauncher 加 `android:priority="1000"` | PMS 解析后 priority 仍为 **0**（被钳制） |
+| 重打包目标桌面加 `android:priority="1000"` | PMS 解析后 priority 仍为 **0**（被钳制） |
 | `setprop sys.fallbackhome_exit` | 无 root 不可写 |
 
 ## 逆向过程
@@ -148,7 +148,7 @@ priority=-1000 match=0x108000 isDefault=true
 com.android.tv.settings.system.FallbackHome      # PatchWall 被禁时
 
 $ adb shell dumpsys package | grep -A6 'Preferred Activities'
-  me.efesser.flauncher/.MainActivity
+  com.spocky.projengmenu/.ui.home.MainActivity
    mMatch=0x100000 mAlways=false                  # 首选在但被规则跳过
 ```
 
@@ -156,15 +156,15 @@ $ adb shell dumpsys package | grep -A6 'Preferred Activities'
 
 ```bash
 adb connect <TV_IP>:5555
-# 1. 装 FLauncher（原版即可，priority 补丁非必需）
-adb install flauncher-armeabi-v7a-release.apk
+# 1. 装 Projectivy（armeabi-v7a 版）
+adb install ProjectivyLauncher-*-xda-release.apk
 # 2. 注册首选桌面
-adb shell cmd package set-home-activity me.efesser.flauncher/me.efesser.flauncher.MainActivity
+adb shell cmd package set-home-activity com.spocky.projengmenu/com.spocky.projengmenu.ui.home.MainActivity
 # 3. 禁用 PatchWall（保留在系统分区，可随时还原）
 adb shell pm uninstall --user 0 com.mitv.tvhome
 # 4. 关键一步：禁用兜底页宿主（AOSP 设置包）
 adb shell pm disable-user --user 0 com.android.tv.settings
-# 5. 验证：HOME 键应落在 FLauncher
+# 5. 验证：HOME 键应落在 Projectivy
 adb shell input keyevent 3 && adb shell dumpsys window windows | grep mCurrentFocus
 ```
 
@@ -176,13 +176,13 @@ adb shell input keyevent 3 && adb shell dumpsys window windows | grep mCurrentFo
 ```bash
 adb shell cmd package install-existing com.mitv.tvhome   # 恢复 PatchWall
 adb shell pm enable com.android.tv.settings               # 恢复兜底页
-adb shell pm uninstall me.efesser.flauncher               # （可选）卸载 FLauncher
+adb shell pm uninstall com.spocky.projengmenu            # （可选）卸载 Projectivy
 ```
 
 ## 其它注意事项
 
 - **ADB 每次重启被复位**：语音"打开设置" → 账号与安全 → ADB 调试
-- FLauncher 换卡顿可换当贝桌面/Projectivy，但**当贝桌面闭源带推荐**，介意请用 FLauncher
+- 想换其它桌面（当贝等）：同样三步即可，但**当贝闭源且带内容推荐位**，介意请保持 Projectivy
 - 开机广告由固件启动流程加载，删 `com.mitv.tvad`（在装的前提下）多数固件可跳过
 
 ---

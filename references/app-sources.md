@@ -14,7 +14,6 @@
 | 影视仓 6.2.8 (TV 32位) | `https://github.com/youhunwl/TVAPP/raw/refs/heads/main/影视/影视仓/影视仓-TV-32位-6.2.8.apk`（路径含中文，curl 里需 URL 编码） | `com.huawei.himovceie` ⚠️正版伪装名 |
 | OK影视 (FongMi) 5.8.2 | `https://github.com/FongMi/Release/releases/download/5.8.2/leanback-armeabi_v7a.apk` | `com.fongmi.android.tv` |
 | ADBKeyboard | `https://github.com/senzhk/ADBKeyboard/raw/master/ADBKeyboard.apk` | `com.android.adbkeyboard` |
-| FLauncher 2025.07.001（备用极简桌面） | `https://github.com/osrosal/flauncher/releases/download/v2025.07.001/flauncher-armeabi-v7a-release.apk` | `me.efesser.flauncher` |
 
 ## 版本更新
 

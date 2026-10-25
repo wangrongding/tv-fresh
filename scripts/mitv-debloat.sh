@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# mitv-debloat: 小米电视去广告 + 换 FLauncher 桌面 (免 root, 可逆)
+# mitv-debloat: 小米电视去广告 + 换 Projectivy 桌面 (免 root, 可逆)
 # 用法: mitv-debloat.sh <list|install|switch|debloat|restore 包名> [TV_IP]
 # 原则: 只 pm uninstall --user 0 (系统分区不动, install-existing 可还原)
 set -u
 TV_IP="${2:-}"
-APK="${FLAUNCHER_APK:-/tmp/flauncher.apk}"
+APK="${LAUNCHER_APK:-/tmp/projectivy.apk}"
 
 # 国内 MIUI TV 社区验证过的广告/推送/统计组件 (MiTVNoAd + 博客园/CSDN 实战清单)
 AD_PKGS=(
@@ -39,12 +39,12 @@ case "${1:-}" in
   install)
     connect
     adb install -r "$APK" || { echo "安装失败"; exit 1; }
-    echo "FLauncher 已安装"
+    echo "Projectivy 已安装"
     ;;
   switchhome)
     # 用法: switchhome <TV_IP> <包名/Activity>
     # 例: switchhome 192.168.1.4 com.spocky.projengmenu/.ui.home.MainActivity
-    #     switchhome 192.168.1.4 me.efesser.flauncher/me.efesser.flauncher.MainActivity
+    #     switchhome 192.168.1.4 com.spocky.projengmenu/com.spocky.projengmenu.ui.home.MainActivity
     COMP="${3:-}"
     [ -z "$COMP" ] && { echo "用法: $0 switchhome <TV_IP> <包名/Activity>"; exit 1; }
     connect

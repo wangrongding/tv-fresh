@@ -1,4 +1,4 @@
-# 小米电视去广告 + 换开源桌面（FLauncher）完全攻略
+# 小米电视去广告 + 换开源桌面完全攻略（推荐 Projectivy）
 
 > 适用于国内版 MIUI TV（实测机型 MiTV-ASTP0 / Android 9，2026-10 成功）
 > 免 root、全程可逆（所有操作都有对应还原命令）。
@@ -51,8 +51,8 @@ git clone https://github.com/wangrongding/tv-fresh ~/.agents/skills/tv-fresh
 | 项 | 结果 |
 |---|---|
 | 广告/推送/统计组件 | 全部移除，重启存活 |
-| 开机桌面 | PatchWall（瀑布流+广告）→ **FLauncher**（开源极简） |
-| HOME 键 | 始终回到 FLauncher |
+| 开机桌面 | PatchWall（瀑布流+广告）→ **Projectivy**（开源、可自定义，实测在用） |
+| HOME 键 | 始终回到 Projectivy |
 | 系统设置 | 不受影响（`com.xiaomi.mitv.settings`） |
 
 ---
@@ -112,7 +112,7 @@ adb shell pm uninstall --user 0 com.miui.analytics
 
 ## 目标
 
-开机不进 PatchWall，直接进 [FLauncher](https://gitlab.com/flauncher/flauncher)（开源、零广告、零推荐）。
+开机不进 PatchWall，直接进第三方 Launcher。**推荐 [Projectivy](https://projectivylauncher.com/)**（开源、可自定义壁纸/分组/屏保，本文作者在用）；FLauncher 为极简备选。（下文逆向实录以 FLauncher 为主角，方法对任意桌面通用。）
 
 ## 踩坑记录（排除法）
 

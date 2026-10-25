@@ -6,7 +6,7 @@
 ## 三步解法（顺序执行）
 
 ```bash
-# 0. 已装目标 Launcher（任意带 HOME filter 的：FLauncher/Projectivy/当贝…）
+# 0. 已装目标 Launcher。推荐 Projectivy（projectivylauncher.com）；任意带 HOME filter 的均可（FLauncher/当贝…）
 # 1. 注册首选
 adb shell cmd package set-home-activity <包名>/<Activity>
 # 2. 禁用 PatchWall（可逆）

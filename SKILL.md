@@ -32,6 +32,7 @@ adb devices   # device=通 / unauthorized=电视上有授权弹窗等用户点
 | 装/配 影视仓、OK影视(FongMi)、TVBox | [`references/streaming-apps.md`](references/streaming-apps.md) |
 | 批量卸预装 / 修权限 | [`references/cleanup-permissions.md`](references/cleanup-permissions.md) |
 | **任何"在电视上输文字/点按钮/看界面"的操作** | [`references/remote-toolbox.md`](references/remote-toolbox.md) ← 强制先读 |
+| **安装任何 APK 之前** | [`references/app-sources.md`](references/app-sources.md) ← 只用实测源+装后核对包名 |
 
 ## 一键脚本
 
